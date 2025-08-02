@@ -1,46 +1,199 @@
-# Getting Started with Create React App
+# Student Management System - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React-based frontend for the Student Management System backend built with Go.
+
+## Features
+
+- 🔐 **Authentication System**
+  - User registration and login
+  - JWT token-based authentication
+  - Protected routes
+
+- 📊 **Dashboard**
+  - Overview statistics
+  - Recent students list
+  - Quick actions
+
+- 👥 **Student Management**
+  - View all students in a responsive table
+  - Add new students with form validation
+  - Edit existing student information
+  - Delete students with confirmation
+  - Search functionality
+
+- 🎨 **Modern UI**
+  - Material-UI components
+  - Responsive design
+  - Clean and intuitive interface
+  - Dark/light theme support
+
+## Tech Stack
+
+- **React 18** with TypeScript
+- **Material-UI (MUI)** for UI components
+- **React Router** for navigation
+- **Axios** for API communication
+- **Context API** for state management
+
+## Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Running Go backend server on `http://localhost:3001`
+
+## Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd student-management-frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:3000`
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── auth/
+│   │   ├── Login.tsx
+│   │   └── Register.tsx
+│   ├── dashboard/
+│   │   └── Dashboard.tsx
+│   ├── layout/
+│   │   └── Layout.tsx
+│   └── students/
+│       ├── StudentList.tsx
+│       └── StudentForm.tsx
+├── contexts/
+│   └── AuthContext.tsx
+├── services/
+│   └── api.ts
+├── App.tsx
+└── index.tsx
+```
+
+## API Endpoints
+
+The frontend expects the following API endpoints from your Go backend:
+
+### Authentication
+- `POST /api/signin` - User login
+- `POST /api/signup` - User registration
+
+### Students
+- `GET /api/students` - Get all students
+- `GET /api/students/:id` - Get student by ID
+- `POST /api/students` - Create new student
+- `PUT /api/students/:id` - Update student
+- `DELETE /api/students/:id` - Delete student
+- `GET /api/students/search?q=query` - Search students
+- `POST /api/students/batch` - Create multiple students
+
+### Dashboard
+- Note: Dashboard statistics are currently using mock data as the backend doesn't have a stats endpoint
+
+## Environment Configuration
+
+Create a `.env` file in the root directory:
+
+```env
+REACT_APP_API_URL=http://localhost:3001/api
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm start` - Start development server
+- `npm build` - Build for production
+- `npm test` - Run tests
+- `npm eject` - Eject from Create React App
 
-### `npm start`
+## Features in Detail
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Authentication
+- Secure login/register forms with validation
+- JWT token storage in localStorage
+- Automatic token refresh
+- Protected route redirection
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Student Management
+- **List View**: Responsive table with sorting and filtering
+- **Add Student**: Form with validation for all required fields
+- **Edit Student**: Pre-populated form for updating information
+- **Delete Student**: Confirmation dialog before deletion
+- **Search**: Real-time search across name, email, and grade
 
-### `npm test`
+### Dashboard
+- **Statistics Cards**: Total students, active students, new students, average age
+- **Recent Students**: List of recently added students
+- **Quick Actions**: Buttons for common tasks
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Customization
 
-### `npm run build`
+### Styling
+The app uses Material-UI theming. You can customize the theme in `App.tsx`:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```typescript
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2', // Your primary color
+    },
+    secondary: {
+      main: '#dc004e', // Your secondary color
+    },
+  },
+});
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### API Configuration
+Update the API base URL in `src/services/api.ts`:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```typescript
+const API_BASE_URL = 'http://your-backend-url/api';
+```
 
-### `npm run eject`
+## Troubleshooting
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Common Issues
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **CORS Errors**
+   - Ensure your Go backend has CORS configured
+   - Check that the API URL is correct
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+2. **Authentication Issues**
+   - Verify JWT token format
+   - Check token expiration
+   - Ensure backend auth endpoints are working
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. **Grid Component Errors**
+   - The app uses Material-UI Grid components
+   - Make sure all MUI dependencies are installed
 
-## Learn More
+## Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For support, please open an issue in the repository or contact the development team.
